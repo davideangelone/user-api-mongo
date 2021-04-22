@@ -13,7 +13,8 @@ public class MongoJwtApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MongoJwtApplication.class, args);
 		
-		logger.info(">>> Docs at : /v3/api-docs <<<");
+		logger.info(">>> Json specs at : /v3/api-docs <<<");
+		logger.info(">>> Yaml specs at : /v3/api-docs.yaml <<<");
 		logger.info(">>> Swagger at : /swagger-ui.html <<<");	
 	}
 

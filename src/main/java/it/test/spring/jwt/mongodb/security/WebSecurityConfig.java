@@ -65,6 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/v3/**").permitAll()
 			.antMatchers("/swagger-ui/**").permitAll()
 			.antMatchers("/swagger-ui.html").permitAll()
+			.antMatchers("/favicon.ico").permitAll()
 			
 			.anyRequest().authenticated();
 
