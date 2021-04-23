@@ -18,5 +18,10 @@ public class ErrorJson {
         this.status = status.value();
         this.error = status.getReasonPhrase();
     }
+    
+    public ErrorJson(HttpStatus status, String error) {
+        this.status = status.value();
+        this.error = error;
+    }
 
 }

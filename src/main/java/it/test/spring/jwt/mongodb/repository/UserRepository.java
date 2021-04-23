@@ -5,22 +5,27 @@ import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import it.test.spring.jwt.mongodb.models.User;
+import it.test.spring.jwt.mongodb.models.dto.UserDto;
 
+@Repository
 public interface UserRepository extends MongoRepository<User, String> {
 	
 	  Optional<User> findByUsername(String username);
 	  
-	  Optional<User> findByEmail(String email);
+	  Optional<UserDto> findByEmail(String email);
 
-	  Boolean existsByUsername(String username);
+	  boolean existsByUsername(String username);
 
-	  Boolean existsByEmail(String email);
+	  boolean existsByEmail(String email);
 	  
-	  List<User> findByNationality(String nationality);
+	  List<UserDto> findByNationality(String nationality);
 	  
-	  @Query("{ 'age' : { $gt: ?0, $lt: ?1 } }")
-	  List<User> findUsersByAgeBetween(int ageFrom, int ageTo);
+	  @Query("{ 'age' : { $gte: ?0, $lte: ?1 } }")
+	  List<UserDto> findByAgeBetween(int ageFrom, int ageTo);
+
+	  void deleteByUsername(String username);
 	  
 }

@@ -36,7 +36,7 @@ public class User {
 	  
 	  private String lastName;
 	  
-	  private String age;
+	  private int age;
 	  
 	  private String nationality;
 	
@@ -105,11 +105,11 @@ public class User {
 		  this.lastName = lastName;
 	  }
 	
-	  public String getAge() {
+	  public int getAge() {
 		  return age;
 	  }
 	
-	  public void setAge(String age) {
+	  public void setAge(int age) {
 		  this.age = age;
 	  }
 	

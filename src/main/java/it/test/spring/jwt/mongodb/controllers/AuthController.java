@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.yaml.snakeyaml.util.ArrayUtils;
 
 import it.test.spring.jwt.mongodb.models.ERole;
 import it.test.spring.jwt.mongodb.models.Role;

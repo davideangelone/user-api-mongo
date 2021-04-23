@@ -2,20 +2,26 @@ package it.test.spring.jwt.mongodb.models.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto implements Serializable {
 	
+	  @NotNull
 	  private String username;
 	
+	  @Email
+	  @NotNull
 	  private String email;
 	  
 	  private String firstName;
 	  
 	  private String lastName;
 	  
-	  private String age;
+	  private int age;
 	  
 	  private String nationality;
 	
@@ -51,11 +57,11 @@ public class UserDto implements Serializable {
 		  this.lastName = lastName;
 	  }
 	
-	  public String getAge() {
+	  public int getAge() {
 		  return age;
 	  }
 	
-	  public void setAge(String age) {
+	  public void setAge(int age) {
 		  this.age = age;
 	  }
 	
