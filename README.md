@@ -5,3 +5,4 @@ Features:
 - JWT authentication
 - MongoDB
 - Spring Boot
+- AOP
