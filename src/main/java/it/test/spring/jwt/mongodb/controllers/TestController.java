@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RequestMapping("/api/test")
 @SecurityRequirement(name = "BearerAuth")
 public class TestController {
+	
 	@GetMapping("/all")
 	public String allAccess() {
 		return "Public Content.";
