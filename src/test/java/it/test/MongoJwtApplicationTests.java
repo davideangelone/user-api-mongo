@@ -19,9 +19,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 
 import it.test.spring.jwt.mongodb.controllers.AuthController;
+import it.test.spring.jwt.mongodb.controllers.UserController;
 import it.test.spring.jwt.mongodb.models.ERole;
 import it.test.spring.jwt.mongodb.models.Role;
-import it.test.spring.jwt.mongodb.models.User;
+import it.test.spring.jwt.mongodb.models.dto.UserDto;
 import it.test.spring.jwt.mongodb.payload.request.LoginRequest;
 import it.test.spring.jwt.mongodb.payload.request.SignupRequest;
 import it.test.spring.jwt.mongodb.repository.RoleRepository;
@@ -41,6 +42,9 @@ class MongoJwtApplicationTests {
 	
 	@Autowired
 	AuthController authController;
+	
+	@Autowired
+	UserController userController;
 	
 		
 	@BeforeEach
@@ -88,16 +92,18 @@ class MongoJwtApplicationTests {
 	
 	@Test
 	void testAddUser() {
-		logger.info("Begin Test add user");
+		logger.info("Begin Test update user");
 		
-		User user = new User("testUser1", "testUser1@test.it", "testPassword1");
-		user.setId("Test_" + System.currentTimeMillis());
+		UserDto user = userController.getUserByUsername("testUser1");
 		user.setFirstName("firstName1");
 		user.setLastName("lastName1");
 		user.setNationality("italian");
-	    userRepository.save(user);
-		  
-		logger.info("End Test add user");
+		user.setAge(50);
+		
+		ResponseEntity<?> result = userController.updateUser(user);
+		assertEquals(HttpStatus.OK, result.getStatusCode());
+		
+		logger.info("End Test update user");
 	}
 	
 	@Test
