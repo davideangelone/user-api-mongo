@@ -25,15 +25,28 @@ public class UserDetailsImpl implements UserDetails {
 
 	@JsonIgnore
 	private String password;
+	
+	private String firstName;
+	
+	private String lastName;
+	
+	private int age;
+	
+	private String nationality;
 
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public UserDetailsImpl(String id, String username, String email, String password,
+			String firstName, String lastName, int age, String nationality,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.nationality = nationality;
 		this.authorities = authorities;
 	}
 
@@ -47,6 +60,10 @@ public class UserDetailsImpl implements UserDetails {
 				user.getUsername(), 
 				user.getEmail(),
 				user.getPassword(), 
+				user.getFirstName(),
+				user.getLastName(),
+				user.getAge(),
+				user.getNationality(),
 				authorities);
 	}
 
@@ -101,5 +118,25 @@ public class UserDetailsImpl implements UserDetails {
 			return false;
 		UserDetailsImpl user = (UserDetailsImpl) o;
 		return Objects.equals(id, user.id);
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public String getNationality() {
+		return nationality;
 	}
 }

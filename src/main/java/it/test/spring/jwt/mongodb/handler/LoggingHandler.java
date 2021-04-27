@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Aspect
 @Component
@@ -29,6 +30,14 @@ public class LoggingHandler {
 
     @Pointcut("execution(* *.*(..))")
     protected void allMethod() { }
+    
+    private String serialize(Object ojb) {
+    	try {
+    		return new ObjectMapper().writeValueAsString(ojb);
+    	} catch (Exception e) {
+    		return String.valueOf(ojb);
+    	}
+    }
 
     //before -> Any resource annotated with @Repository annotation
     //and all method and function
@@ -39,7 +48,7 @@ public class LoggingHandler {
         		joinPoint.getSignature().getDeclaringType().getSimpleName(),
         		joinPoint.getSignature().getName(),
         		joinPoint.getSignature(), 
-        		new ObjectMapper().writeValueAsString(joinPoint.getArgs()));
+        		serialize(joinPoint.getArgs()));
     }
 
     //After -> All method within resource annotated with @Repository annotation
@@ -50,6 +59,6 @@ public class LoggingHandler {
         		joinPoint.getSignature().getDeclaringType().getSimpleName(),
         		joinPoint.getSignature().getName(),
         		joinPoint.getSignature(),
-        		new ObjectMapper().writeValueAsString(result));
+        		serialize(result));
     }
 }
