@@ -1,7 +1,7 @@
 package it.test;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Set;
 import java.util.stream.Collectors;
