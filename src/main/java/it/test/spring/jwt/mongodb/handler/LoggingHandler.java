@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Aspect
@@ -22,13 +21,19 @@ public class LoggingHandler {
     private static final Logger log = LoggerFactory.getLogger(LoggingHandler.class);
 
     @Pointcut("this(org.springframework.data.repository.Repository)")
-    public void repository() {}
+    public void repository() {
+    	//Match any repository
+    }
     
     @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
-    public void controller() {}
+    public void controller() {
+    	//Match any controller
+    }
 
     @Pointcut("execution(* *.*(..))")
-    protected void allMethod() { }
+    protected void allMethod() {
+    	//Match any method execution
+    }
     
     private String serialize(Object ojb) {
     	try {
@@ -41,7 +46,7 @@ public class LoggingHandler {
     //before -> Any resource annotated with @Repository annotation
     //and all method and function
     @Before("(repository() || controller()) && allMethod()")
-    public void logBefore(JoinPoint joinPoint) throws JsonProcessingException {
+    public void logBefore(JoinPoint joinPoint) {
         log.info(">>>> {} - [{}.{}] - Method [{}] - Args {}",
         		new SimpleDateFormat("dd-MM-yyyy HH24:mm:ss").format(new Date()),
         		joinPoint.getSignature().getDeclaringType().getSimpleName(),
@@ -52,7 +57,7 @@ public class LoggingHandler {
 
     //After -> All method within resource annotated with @Repository annotation
     @AfterReturning(pointcut = "(repository() || controller()) && allMethod()", returning = "result")
-    public void logAfter(JoinPoint joinPoint, Object result) throws JsonProcessingException {
+    public void logAfter(JoinPoint joinPoint, Object result) {
         log.info("<<<< {} - [{}.{}] - Method [{}] - Result [{}]",
         		new SimpleDateFormat("dd-MM-yyyy HH24:mm:ss").format(new Date()),
         		joinPoint.getSignature().getDeclaringType().getSimpleName(),

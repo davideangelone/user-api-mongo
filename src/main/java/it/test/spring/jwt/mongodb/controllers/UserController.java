@@ -60,7 +60,7 @@ public class UserController {
     }
 	
 	@PatchMapping("/update")
-	public ResponseEntity<?> updateUser(@Valid UserDto user) {
+	public ResponseEntity<ErrorJson> updateUser(@Valid UserDto user) {
 		
 		User currentUser = userRepository
 							.findByUsername(user.getUsername())
@@ -81,7 +81,7 @@ public class UserController {
 	
 	
 	@DeleteMapping("/delete/{username}")
-	public ResponseEntity<?> deleteUser(@PathVariable("username") String username) {
+	public ResponseEntity<ErrorJson> deleteUser(@PathVariable("username") String username) {
 		if (!userRepository.existsByUsername(username)) {
 			return new ResponseEntity<>(new ErrorJson(HttpStatus.BAD_REQUEST, "Username not found"), HttpStatus.BAD_REQUEST);
 		}

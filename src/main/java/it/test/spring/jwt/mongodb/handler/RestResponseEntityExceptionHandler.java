@@ -13,7 +13,7 @@ import it.test.spring.jwt.mongodb.models.ErrorJson;
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = { ResourceNotFoundException.class })
-    protected ResponseEntity<?> handleConflict(ResourceNotFoundException ex, WebRequest request) {
-        return new ResponseEntity<ErrorJson>(new ErrorJson(HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+    protected ResponseEntity<ErrorJson> handleConflict(ResourceNotFoundException ex, WebRequest request) {
+        return new ResponseEntity<>(new ErrorJson(HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
     }
 }

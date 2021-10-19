@@ -12,6 +12,9 @@ import org.springframework.beans.BeanWrapperImpl;
 
 public class BeanConverter {
 	
+	private BeanConverter() {
+	}
+	
 	public static <T> T convert(Object bean, Class<T> resultType) {
 		T result = BeanUtils.instantiateClass(resultType);
 		BeanUtils.copyProperties(bean, result);

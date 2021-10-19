@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 
 public class ErrorJson {
 
-    public Integer 	status;
-    public String 	error;
+    private Integer status;
+    private String 	error;
 
     public ErrorJson(int status, Map<String, Object> errorAttributes) {
         this.status = status;
@@ -23,5 +23,13 @@ public class ErrorJson {
         this.status = status.value();
         this.error = error;
     }
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public String getError() {
+		return error;
+	}
 
 }
